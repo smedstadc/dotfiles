@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+import os, sys
+
+def main():
+    dotignore_path = os.path.expanduser('~/.dotfiles/.dotignore')
+    dotfiles_dir = os.path.expanduser('~/.dotfiles/')
+    forcing_overwrite = '--force' in sys.argv
+
+    with open(dotignore_path) as f:
+        ignore_list = [x.strip() for x in f.readlines()]
+
+    for target_path in os.listdir(dotfiles_dir):
+        filename = target_path.split("/")[-1:][0]
+        target_path = os.path.join(dotfiles_dir, target_path)
+        if filename not in ignore_list:
+            dest = os.path.expanduser("~/{}".format(filename))
+            if os.path.exists(dest) and not forcing_overwrite:
+                print("Skip existing file: {}".format(dest))
+            elif os.path.islink(dest) and not forcing_overwrite:
+                print("Skip existing link: {}".format(dest))
+            else:
+                if forcing_overwrite:
+                    print("Remove existing: {}".format(dest))
+                    os.remove(dest)
+
+                message = "Create symlink to {} in {}".format(target_path, dest)
+                print(message)
+                os.symlink(target_path, dest)
+
+    print("Done!")
+
+
+
+if __name__ == '__main__':
+    main()

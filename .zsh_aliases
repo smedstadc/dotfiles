@@ -1,0 +1,15 @@
+alias zsource="source ~/.zshrc"
+alias edot="atom ~/.dotfiles/"
+
+# rails dev
+alias brailles="bundle exec spring rails"
+alias brake="bundle exec spring rake"
+alias lsr="lsof -i tcp:3000 | grep ruby"
+
+# seriously get out of my fucking terminal rubymine
+alias mine="nohup mine . & disown"
+
+# git
+alias ga="git add --all"
+alias gcan="git commit --amend --no-edit"
+alias gco="git checkout"
