@@ -13,8 +13,10 @@ def main():
     for target_path in os.listdir(dotfiles_dir):
         filename = target_path.split("/")[-1:][0]
         target_path = os.path.join(dotfiles_dir, target_path)
+
         if filename not in ignore_list:
             dest = os.path.expanduser("~/{}".format(filename))
+
             if os.path.exists(dest) and not forcing_overwrite:
                 print("Skip existing file: {}".format(dest))
             elif os.path.islink(dest) and not forcing_overwrite:
@@ -24,8 +26,7 @@ def main():
                     print("Remove existing: {}".format(dest))
                     os.remove(dest)
 
-                message = "Create symlink to {} in {}".format(target_path, dest)
-                print(message)
+                print("Create symlink to {} in {}".format(target_path, dest))
                 os.symlink(target_path, dest)
 
     print("Done!")
