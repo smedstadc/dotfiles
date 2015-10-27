@@ -7,7 +7,9 @@ alias brake="bundle exec spring rake"
 alias lsr="lsof -i tcp:3000 | grep ruby"
 
 # seriously get out of my fucking terminal rubymine
-alias mine="nohup mine . & disown"
+alias mine="nohup mine . >/dev/null 2>&1 & disown"
+# fuck you too pycharm
+alias charm="nohup charm . >/dev/null 2>&1 & disown"
 
 # git
 alias ga="git add --all"
