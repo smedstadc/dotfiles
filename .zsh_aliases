@@ -1,5 +1,10 @@
+# dotfiles support
 alias zsource="source ~/.zshrc"
 alias edot="atom ~/.dotfiles/"
+alias dotup="~/.dotfiles/setup"
+
+# dev
+alias mux="tmuxinator"
 
 # rails dev
 alias brailles="bundle exec spring rails"
