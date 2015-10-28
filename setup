@@ -26,7 +26,7 @@ def main():
                     print("Remove existing: {}".format(dest))
                     os.remove(dest)
 
-                print("Create symlink to {} in {}".format(target_path, dest))
+                print("Create symlink to {} at {}".format(target_path, dest))
                 os.symlink(target_path, dest)
 
     print("Done!")
