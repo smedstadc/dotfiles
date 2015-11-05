@@ -5,16 +5,19 @@ alias dotup="~/.dotfiles/setup"
 
 # dev
 alias mux="tmuxinator"
+alias tk="tmux kill-session -t"
 
 # rails dev
 alias brailles="bundle exec spring rails"
 alias brake="bundle exec spring rake"
 alias lsr="lsof -i tcp:3000 | grep ruby"
 
-# seriously get out of my fucking terminal rubymine
-alias mine="nohup mine . >/dev/null 2>&1 & disown"
-# fuck you too pycharm
-alias charm="nohup charm . >/dev/null 2>&1 & disown"
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  # detach IntelliJ after launching from terminal
+  alias mine="nohup mine . >/dev/null 2>&1 & disown"
+  alias charm="nohup charm . >/dev/null 2>&1 & disown"
+  alias idea="nohup idea . >/dev/null 2>&1 & disown"
+fi
 
 # git
 alias ga="git add --all"
