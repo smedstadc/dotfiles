@@ -2,6 +2,7 @@
 alias zsource="source ~/.zshrc"
 alias edot="atom ~/.dotfiles/"
 alias dotup="~/.dotfiles/setup"
+alias godot="cd ~/.dotfiles"
 
 # dev
 alias mux="tmuxinator"
@@ -23,3 +24,6 @@ fi
 alias ga="git add --all"
 alias gcan="git commit --amend --no-edit"
 alias gco="git checkout"
+
+# steam
+alias steam="LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 nohup steam &"
