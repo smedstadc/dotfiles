@@ -22,9 +22,12 @@ def main():
             elif os.path.islink(dest) and not forcing_overwrite:
                 print("Skip existing link: {}".format(dest))
             else:
-                if forcing_overwrite:
-                    print("Remove existing: {}".format(dest))
-                    os.remove(dest)
+                try:
+                    if forcing_overwrite:
+                        print("Remove existing: {}".format(dest))
+                        os.remove(dest)
+                except OSError as e:
+                    print("Exception: {}".format(e))
 
                 print("Create symlink to {} at {}".format(target_path, dest))
                 os.symlink(target_path, dest)
