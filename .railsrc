@@ -1,1 +1,1 @@
---skip-bundle --skip-turbolinks --skip-javascript --skip-test-unit --skip-git --database=postgresql
+--skip-bundle --skip-turbolinks --database=postgresql
