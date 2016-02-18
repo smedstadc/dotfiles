@@ -2,14 +2,19 @@
 alias zsource="source ~/.zshrc"
 alias edot="atom ~/.dotfiles/"
 alias dotup="~/.dotfiles/setup"
+alias godot="cd ~/.dotfiles"
 
 # dev
 alias mux="tmuxinator"
 alias tk="tmux kill-session -t"
 
 # rails dev
-alias brailles="bundle exec spring rails"
-alias brake="bundle exec spring rake"
+alias berails="bundle exec rails"
+alias berake="bundle exec rake"
+alias besrails="bundle exec spring rails"
+alias besrake="bundle exec spring rake"
+alias devtail="tail -f log/development.log"
+alias testprep="bundle exec rake db:schema:load RAILS_ENV=test"
 alias lsr="lsof -i tcp:3000 | grep ruby"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -17,9 +22,12 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias mine="nohup mine . >/dev/null 2>&1 & disown"
   alias charm="nohup charm . >/dev/null 2>&1 & disown"
   alias idea="nohup idea . >/dev/null 2>&1 & disown"
+  alias wstorm="nohup wstorm . >/dev/null 2>&1 & disown"
 fi
 
 # git
 alias ga="git add --all"
 alias gcan="git commit --amend --no-edit"
 alias gco="git checkout"
+
+eval "$(thefuck --alias)"
