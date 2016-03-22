@@ -9,12 +9,10 @@ alias mux="tmuxinator"
 alias tk="tmux kill-session -t"
 
 # rails dev
-alias berails="bundle exec rails"
-alias berake="bundle exec rake"
-alias besrails="bundle exec spring rails"
-alias besrake="bundle exec spring rake"
+alias brails="bundle exec bin/rails"
+alias brake="bundle exec bin/rake"
 alias devtail="tail -f log/development.log"
-alias testprep="bundle exec rake db:schema:load RAILS_ENV=test"
+alias testprep="bundle exec bin/rake db:schema:load RAILS_ENV=test"
 alias lsr="lsof -i tcp:3000 | grep ruby"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
