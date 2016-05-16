@@ -28,7 +28,7 @@ alias ga="git add --all"
 alias gcan="git commit --amend --no-edit"
 alias gco="git checkout"
 
-eval "$(thefuck --alias)"
+#steam
+alias runsteam="LD_PRELOAD='/usr/lib/i386-linux-gnu/libstdc++.so.6' steam &!; exit"
 
-# steam
-alias steam="LD_PRELOAD='/usr/$LIB/libstdc++.so.6' DISPLAY=:0 nohup steam &"
+eval "$(thefuck --alias)"
