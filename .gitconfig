@@ -5,3 +5,4 @@
 	default = simple
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  rb = for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'

@@ -7,11 +7,13 @@ alias godot="cd ~/.dotfiles"
 # dev
 alias mux="tmuxinator"
 alias tk="tmux kill-session -t"
+alias doismell="reek app/ -f html > report.html"
 
 # rails dev
-alias brails="bundle exec bin/rails"
-alias brake="bundle exec bin/rake"
+alias brails="bin/rails"
+alias brake="bin/rake"
 alias devtail="tail -f log/development.log"
+alias testtail="tail -f log/test.log"
 alias testprep="bundle exec bin/rake db:schema:load RAILS_ENV=test"
 alias lsr="lsof -i tcp:3000 | grep ruby"
 
