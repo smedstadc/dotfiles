@@ -14,23 +14,36 @@ alias brails="bin/rails"
 alias brake="bin/rake"
 alias devtail="tail -f log/development.log"
 alias testtail="tail -f log/test.log"
-alias testprep="bundle exec bin/rake db:schema:load RAILS_ENV=test"
+alias testprep="bin/rake db:schema:load RAILS_ENV=test"
 alias lsr="lsof -i tcp:3000 | grep ruby"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  function runmine() {
+    exec mine "$@" &>> /dev/null  &!
+  }
+  
+  function runcharm() {
+    exec charm "$@" &>> /dev/null  &!
+  }
+  
+  function runidea() {
+    exec idea "$@" &>> /dev/null  &!
+  }
+  
+  function runwstorm() {
+    exec wstorm "$@" &>> /dev/null  &!
+  }
+  
   # detach IntelliJ after launching from terminal
-  alias mine="nohup mine . >/dev/null 2>&1 & disown"
-  alias charm="nohup charm . >/dev/null 2>&1 & disown"
-  alias idea="nohup idea . >/dev/null 2>&1 & disown"
-  alias wstorm="nohup wstorm . >/dev/null 2>&1 & disown"
+  alias mine=runmine
+  alias charm=runcharm
+  alias idea=runidea
+  alias wstorm=runwstorm
 fi
 
 # git
 alias ga="git add --all"
 alias gcan="git commit --amend --no-edit"
-alias gco="git checkout"
-
-#steam
-alias runsteam="LD_PRELOAD='/usr/lib/i386-linux-gnu/libstdc++.so.6' steam &!; exit"
+alias gco="git checkout"\
 
 eval "$(thefuck --alias)"

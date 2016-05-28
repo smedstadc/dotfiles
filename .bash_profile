@@ -1,15 +1,11 @@
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  export EDITOR=gedit
-  export PATH="/usr/local/heroku/bin:$PATH"
-else
-  export EDITOR=vim
-fi
+source "$HOME/.bashrc"
 
+export EDITOR=gedit
+export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$HOME/.miniconda2/bin:$PATH"
 export PATH="$HOME/.miniconda3/bin:$PATH"
 export PATH="$HOME/.npm-packages/bin:$PATH"
 export NPM_PACKAGES="$HOME/.npm-packages"
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-export IBUS_ENABLE_SYNC_MODE=1
+
 eval "$(rbenv init -)"
