@@ -8,6 +8,7 @@ alias godot="cd ~/.dotfiles"
 alias mux="tmuxinator"
 alias tk="tmux kill-session -t"
 alias doismell="reek app/ -f html > report.html"
+alias gp="cd ~/projects"
 
 # rails dev
 alias brails="bin/rails"
@@ -16,6 +17,9 @@ alias devtail="tail -f log/development.log"
 alias testtail="tail -f log/test.log"
 alias testprep="bundle exec bin/rake db:schema:load RAILS_ENV=test"
 alias lsr="lsof -i tcp:3000 | grep ruby"
+
+# mobile dev
+alias cord=cordova
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   # detach IntelliJ after launching from terminal
