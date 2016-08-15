@@ -1,5 +1,10 @@
-unset MANPATH
-export EDITOR=vim
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  export EDITOR=gedit
+  export PATH="/usr/local/heroku/bin:$PATH"
+else
+  export EDITOR=vim
+fi
+
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.miniconda2/bin:$PATH"
 export PATH="$HOME/.miniconda3/bin:$PATH"
