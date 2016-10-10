@@ -1,6 +1,16 @@
 # Jetbrains #
-###################
+#############
 .idea/
+
+# Secrets #
+###########
+.env
+.env.development
+.env.test
+.env.production
+.envfile
+ENVFILE
+Envfile
 
 # Compiled source #
 ###################

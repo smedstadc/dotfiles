@@ -9,6 +9,7 @@ set lazyredraw
 set showmatch
 set incsearch
 set hlsearch
+set backspace=indent,eol,start
 nnoremap <leader><space> :nohlsearch<CR>
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 syntax enable
