@@ -10,12 +10,33 @@ alias tk="tmux kill-session -t"
 alias doismell="reek app/ -f html > report.html"
 alias gp="cd ~/projects"
 
-#js
+# js
 # default yarn to vendor folder because we usually work with those
 alias yav="yarn add --modules-folder=vendor/assets/yarn"
 alias yar="yarn remove --modules-folder=vendor/assets/yarn"
 alias yiv="yarn install --modules-folder=vendor/assets/yarn"
-alias ember="$(npm bin)/ember"
+
+ember() {
+  $(npm bin)/ember $@
+}
+
+rails() {
+  if [ -f $(pwd)/bin/rails ]; then
+    echo "using binstub"
+    $(pwd)/bin/rails $@
+  elif [ -f $(pwd)/Gemfile ]; then
+    echo "using bundle exec"
+    bundle exec rails $@
+  elif [ -d $(pwd)/.bundle ]; then
+    echo "using bundle exec"
+    bundle exec rails $@
+  elif [ -f $HOME/.rbenv/shims/rails ]; then
+    echo "using rbenv shim"
+    $HOME/.rbenv/shims/rails $@
+  else
+    echo "computer cannot into rails :("
+  fi
+}
 
 # ruby
 alias be="bundle exec"
