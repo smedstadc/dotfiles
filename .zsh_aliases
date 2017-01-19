@@ -10,6 +10,16 @@ alias tk="tmux kill-session -t"
 alias doismell="reek app/ -f html > report.html"
 alias gp="cd ~/projects"
 
+#js
+# default yarn to vendor folder because we usually work with those
+alias yav="yarn add --modules-folder=vendor/assets/yarn"
+alias yar="yarn remove --modules-folder=vendor/assets/yarn"
+alias yiv="yarn install --modules-folder=vendor/assets/yarn"
+alias ember="$(npm bin)/ember"
+
+# ruby
+alias be="bundle exec"
+
 # rails dev
 alias brails="bin/rails"
 alias brake="bin/rake"

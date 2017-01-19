@@ -1,1 +1,1 @@
---skip-bundle --skip-turbolinks --database=postgresql
+--skip-bundle --skip-action-cable --skip-turbolinks --database=postgresql
