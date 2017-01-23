@@ -16,9 +16,11 @@ alias yav="yarn add --modules-folder=vendor/assets/yarn"
 alias yar="yarn remove --modules-folder=vendor/assets/yarn"
 alias yiv="yarn install --modules-folder=vendor/assets/yarn"
 
+
 ember() {
   $(npm bin)/ember $@
 }
+
 
 rails() {
   if [ -f $(pwd)/bin/rails ]; then
@@ -35,6 +37,24 @@ rails() {
     $HOME/.rbenv/shims/rails $@
   else
     echo "computer cannot into rails :("
+  fi
+}
+
+guard() {
+  if [ -f $(pwd)/bin/guard ]; then
+    echo "using binstub"
+    $(pwd)/bin/guard $@
+  elif [ -f Gemfile ]; then
+    echo "using bundle exec"
+    bundle exec guard $@
+  elif [ -d $(pwd)/.bundle ]; then
+    echo "using bundle exec"
+    bundle exec guard $@
+  elif [ -f $HOME/.rbenv/shims/guard ]; then
+    echo "using rbenv shim"
+    $HOME/.rbenv/shims/guard $@
+  else
+    echo "computer cannot into guard :("
   fi
 }
 
