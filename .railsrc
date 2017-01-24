@@ -1,1 +1,2 @@
---skip-bundle --skip-action-cable --skip-turbolinks --database=postgresql
+--skip-action-cable --skip-turbolinks --database=postgresql --template=/Users/smedstadc/projects/mreach-rails-template/template.rb
+

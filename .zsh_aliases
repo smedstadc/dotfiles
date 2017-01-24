@@ -18,7 +18,13 @@ alias yiv="yarn install --modules-folder=vendor/assets/yarn"
 
 
 ember() {
-  $(npm bin)/ember $@
+  if [ -f $(npm bin)/ember ]; then
+    echo "using project ember-cli"
+    $(npm bin)/ember $@
+  elif [ -f $(nodenv which ember) ]; then
+    echo "using ember-cli found with nodenv"
+    $(nodenv which ember) $@
+  fi
 }
 
 
@@ -32,9 +38,9 @@ rails() {
   elif [ -d $(pwd)/.bundle ]; then
     echo "using bundle exec"
     bundle exec rails $@
-  elif [ -f $HOME/.rbenv/shims/rails ]; then
-    echo "using rbenv shim"
-    $HOME/.rbenv/shims/rails $@
+  elif [ -f $(rbenv which rails) ]; then
+    echo "using rails managed by rbenv"
+    $(rbenv which rails) $@
   else
     echo "computer cannot into rails :("
   fi
