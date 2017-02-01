@@ -64,6 +64,24 @@ guard() {
   fi
 }
 
+rake() {
+  if [ -f $(pwd)/bin/rake ]; then
+    echo "using binstub"
+    $(pwd)/bin/rake $@
+  elif [ -f Gemfile ]; then
+    echo "using bundle exec"
+    bundle exec rake $@
+  elif [ -d $(pwd)/.bundle ]; then
+    echo "using bundle exec"
+    bundle exec rake $@
+  elif [ -f $HOME/.rbenv/shims/rake ]; then
+    echo "using rbenv shim"
+    $HOME/.rbenv/shims/rake $@
+  else
+    echo "computer cannot into rake :("
+  fi
+}
+
 # ruby
 alias be="bundle exec"
 
