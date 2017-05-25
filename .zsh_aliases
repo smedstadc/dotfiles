@@ -16,9 +16,6 @@ alias yav="yarn add --modules-folder=vendor/assets/yarn"
 alias yar="yarn remove --modules-folder=vendor/assets/yarn"
 alias yiv="yarn install --modules-folder=vendor/assets/yarn"
 
-
-# choose rails template
-
 hanami() {
   if [ -f $(pwd)/Gemfile ]; then
     echo "using bundle exec"
@@ -46,9 +43,9 @@ jekyll() {
 
 
 ember() {
-  if [ -x $(npm bin)/ember ]; then
+  if [ -x $(yarnpath() bin)/ember ]; then
     echo "using node_modules ember-cli"
-    $(yarn bin)/ember $@
+    $(yarnpath() bin)/ember $@
   elif [ -x $(nodenv which ember) ]; then
     echo "using nodenv shim ember-cli"
     $(nodenv which ember) $@
@@ -119,8 +116,10 @@ rspec() {
 # I have to be silent.
 yarn() {
   if [ -x $(pwd)/bin/yarn ]; then
+    echo "using binstub"
     $(pwd)/bin/yarn $@
   elif [ -x /usr/local/bin/yarn ]; then
+    echo "using /usr/local/bin/yarn"
     /usr/local/bin/yarn $@
   elif [ -x $(nodenv which yarn) ]; then
     $(nodenv which yarn) $@
@@ -128,6 +127,17 @@ yarn() {
     echo "computer cannot into yarn :("
   fi
 }
+
+yarnpath() {
+  if [ -x $(pwd)/bin/yarn ]; then
+    return $(pwd)/bin/yarn
+  elif [ -x /usr/local/bin/yarn ]; then
+    return /usr/local/bin/yarn
+  elif [ -x $(nodenv which yarn) ]; then
+    return $(nodenv which yarn)
+  fi
+}
+
 
 # ruby
 alias be="bundle exec"
