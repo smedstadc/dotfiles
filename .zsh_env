@@ -14,6 +14,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
   export PATH="$HOME/Library/Android/sdk/build-tools/25.0.1:$PATH"
   export ANDROID_HOME="$HOME/Library/Android/sdk"
+  export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 fi
 
 export ADB_VENDOR_KEYS="$HOME/.android"

@@ -1,160 +1,136 @@
+exec 3>&1
+
 # dotfiles support
-alias zsource="source ~/.zshrc"
+alias reload-env="source ~/.zsh_env"
+alias reload-aliases="source ~/.zsh_aliases"
 alias edot="atom ~/.dotfiles/"
 alias dotup="~/.dotfiles/setup"
 alias godot="cd ~/.dotfiles"
 
-# dev
-alias mux="tmuxinator"
-alias tk="tmux kill-session -t"
-alias doismell="reek app/ -f html > report.html"
-alias gp="cd ~/projects"
-
-# js
-# default yarn to vendor folder because we usually work with those
-alias yav="yarn add --modules-folder=vendor/assets/yarn"
-alias yar="yarn remove --modules-folder=vendor/assets/yarn"
-alias yiv="yarn install --modules-folder=vendor/assets/yarn"
 
 hanami() {
   if [ -f $(pwd)/Gemfile ]; then
-    echo "using bundle exec"
+    echo "using bundle exec" >&3
     bundle exec hanami $@
-  elif [ -x $(rbenv which hanami) ]; then
-    echo "using hanami managed by rbenv"
+  elif rbenv which hanami > /dev/null 2>&1; then
+    echo "using rbenv shim" >&3
     $(rbenv which hanami) $@
   else
-    echo "computer cannot into hanami :("
+    echo "computer cannot into hanami :(" >&3
+    return 1
   fi
 }
 
 
 jekyll() {
   if [ -f $(pwd)/Gemfile ]; then
-    echo "using bundle exec"
+    echo "using bundle exec" >&3
     bundle exec jekyll $@
-  elif [ -x $(rbenv which jekyll) ]; then
-    echo "using jekyll managed by rbenv"
+  elif rbenv which jekyll > /dev/null 2>&1; then
+    echo "using rbenv shim" >&3
     $(rbenv which jekyll) $@
   else
-    echo "computer cannot into jekyll :("
+    echo "computer cannot into jekyll :(" >&3
+    return 1
   fi
 }
 
 
 ember() {
-  if [ -x $(yarnpath() bin)/ember ]; then
-    echo "using node_modules ember-cli"
-    $(yarnpath() bin)/ember $@
-  elif [ -x $(nodenv which ember) ]; then
-    echo "using nodenv shim ember-cli"
-    $(nodenv which ember) $@
+  if [ -x $(yarn bin)/ember ]; then
+    echo "using version in node_modules" >&3
+    $(yarn bin)/ember $@
+  elif [ -x ~/.config/yarn/global/node_modules/.bin/ember ]; then
+    echo "using version in global node_modules" >&3
+    ~/.config/yarn/global/node_modules/.bin/ember $@
+  elif [ -x $(yarn global bin)/ember ]; then
+    echo "using nodenv shim" >&3
+    $(yarn global bin)/ember $@
+  else
+    echo "computer cannot into jekyll :(" >&3
+    return 1
   fi
 }
 
 
 rails() {
   if [ -x $(pwd)/bin/rails ]; then
-    echo "using binstub"
+    echo "using binstub" >&3
     $(pwd)/bin/rails $@
   elif [ -f $(pwd)/Gemfile ]; then
-    echo "using bundle exec"
+    echo "using bundle exec" >&3
     bundle exec rails $@
-  elif [ -x $(rbenv which rails) ]; then
-    echo "using rails managed by rbenv"
+  elif rbenv which rails > /dev/null 2>&1; then
+    echo "using rbenv shim" >&3
     $(rbenv which rails) $@
   else
-    echo "computer cannot into rails :("
+    echo "computer cannot into rails :(" >&3
+    return 1
   fi
 }
+
 
 guard() {
   if [ -x $(pwd)/bin/guard ]; then
-    echo "using binstub"
+    echo "using binstub" >&3
     $(pwd)/bin/guard $@
   elif [ -f Gemfile ]; then
-    echo "using bundle exec"
+    echo "using bundle exec" >&3
     bundle exec guard $@
-  elif [ -x $(rbenv which guard) ]; then
-    echo "using rbenv shim"
+  elif rbenv which guard > /dev/null 2>&1; then
+    echo "using rbenv shim" >&3
     $(rbenv which guard) $@
   else
-    echo "computer cannot into guard :("
+    echo "computer cannot into guard :(" >&3
+    return 1
   fi
 }
 
+
 rake() {
   if [ -x $(pwd)/bin/rake ]; then
-    echo "using binstub"
+    echo "using binstub" >&3
     $(pwd)/bin/rake $@
   elif [ -f Gemfile ]; then
-    echo "using bundle exec"
+    echo "using bundle exec" >&3
     bundle exec rake $@
-  elif [ -x $(rbenv which rake) ]; then
-    echo "using rbenv shim"
+  elif rbenv which rake > /dev/null 2>&1; then
+    echo "using rbenv shim" >&3
     $(rbenv which rake) $@
   else
-    echo "computer cannot into rake :("
+    echo "computer cannot into rake :(" >&3
+    return 1
   fi
 }
 
 rspec() {
   if [ -x $(pwd)/bin/rspec ]; then
-    echo "using binstub"
+    echo "using binstub" >&3
     $(pwd)/bin/rspec $@
   elif [ -f Gemfile ]; then
-    echo "using bundle exec"
+    echo "using bundle exec" >&3
     bundle exec rspec $@
-  elif [ -x $(rbenv which rspec) ]; then
-    echo "using rbenv shim"
+  elif rbenv which rspec > /dev/null 2>&1; then
+    echo "using rbenv shim" >&3
     $(rbenv which rspec) $@
   else
-    echo "computer cannot into rspec :("
+    echo "computer cannot into rspec :(" >&3
+    return 1
   fi
 }
 
-# I have to be silent.
+
 yarn() {
   if [ -x $(pwd)/bin/yarn ]; then
-    echo "using binstub"
+    echo "using binstub" >&3
     $(pwd)/bin/yarn $@
-  elif [ -x /usr/local/bin/yarn ]; then
-    echo "using /usr/local/bin/yarn"
-    /usr/local/bin/yarn $@
+  elif [ -x /usr/bin/yarn ]; then
+    echo "using global yarn" >&3
+    /usr/bin/yarn $@
   elif [ -x $(nodenv which yarn) ]; then
     $(nodenv which yarn) $@
   else
-    echo "computer cannot into yarn :("
+    echo "computer cannot into yarn :(" >&3
+    return 1
   fi
 }
-
-yarnpath() {
-  if [ -x $(pwd)/bin/yarn ]; then
-    return $(pwd)/bin/yarn
-  elif [ -x /usr/local/bin/yarn ]; then
-    return /usr/local/bin/yarn
-  elif [ -x $(nodenv which yarn) ]; then
-    return $(nodenv which yarn)
-  fi
-}
-
-
-# ruby
-alias be="bundle exec"
-
-# rails dev
-alias devtail="tail -f log/development.log"
-alias testtail="tail -f log/test.log"
-alias lsr="lsof -i tcp:3000 | grep ruby"
-alias fixit="pkill spring; pkill puma"
-alias getsprung="bundle exec spring binstub --all"
-
-# mobile dev
-alias cord=cordova
-
-# git
-alias ga="git add --all"
-alias gcan="git commit --amend --no-edit"
-alias gco="git checkout"
-
-alias ember-clean="rm -rf node_modules bower_components tmp dist"
